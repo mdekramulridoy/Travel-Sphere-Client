@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   // All Navbar link here
   const links = (
     <>
@@ -16,9 +25,21 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {/* Navbar user link start */}
-
-      {/* Navbar user link start */}
+      {user ? (
+        <>
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/login" className="px-2 py-1">
+              Login
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -61,9 +82,7 @@ const Navbar = () => {
               src="https://i.ibb.co.com/SvGff4r/logo.png"
               alt="travel-sphere logo"
             />
-            <h1 className="text-sm font-bold">
-              Travel Sphere
-            </h1>
+            <h1 className="text-sm font-bold">Travel Sphere</h1>
           </Link>
         </div>
         {/* Center for large device*/}
@@ -72,7 +91,20 @@ const Navbar = () => {
         </div>
         {/* User login button Start*/}
         <div className="navbar-end">
-          <button  className="btn">Login</button>
+          {user ? (
+            <>
+              <button onClick={handleLogOut} className="btn btn-ghost">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className="px-2 py-1">
+                Login
+              </NavLink>
+            </>
+          )}
+          {/* <button className="btn">Login</button> */}
         </div>
         {/* User login button End*/}
       </div>
