@@ -11,15 +11,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/visas" className="px-2 py-1">
-          All Visas
-        </NavLink>
-      </li>
-      <li>
         <NavLink to="/about" className="px-2 py-1">
-          About Us
+          About us
         </NavLink>
       </li>
+
       {/* Navbar user link start */}
 
       {/* Navbar user link start */}
