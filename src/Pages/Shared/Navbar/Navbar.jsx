@@ -61,6 +61,9 @@ const Navbar = () => {
               src="https://i.ibb.co.com/SvGff4r/logo.png"
               alt="travel-sphere logo"
             />
+            <h1 className="text-sm font-bold">
+              Travel Sphere
+            </h1>
           </Link>
         </div>
         {/* Center for large device*/}
@@ -69,7 +72,7 @@ const Navbar = () => {
         </div>
         {/* User login button Start*/}
         <div className="navbar-end">
-          <button className="btn">Login</button>
+          <button  className="btn">Login</button>
         </div>
         {/* User login button End*/}
       </div>
