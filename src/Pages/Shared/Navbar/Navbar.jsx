@@ -21,7 +21,7 @@ const Navbar = () => {
       {/* Navbar user link start */}
     </>
   );
- 
+
   return (
     <div className="sticky top-0 bg-[#77d8ffda] px-4 lg:px-16 py-2 z-50 shadow-md backdrop-blur-lg">
       {/* Start */}
@@ -31,7 +31,7 @@ const Navbar = () => {
             <button
               tabIndex={0}
               role="button"
-              className="btn  btn-ghost lg:hidden md:hidden "
+              className="btn btn-ghost lg:hidden md:hidden "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const Navbar = () => {
             </button>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content bg-primary rounded-box z-[1] mt-3 p-2 shadow flex flex-col gap-2 text-black bg-[#77d8ffda]"
+              className="menu backdrop-blur-3xl menu-compact dropdown-content bg-[#47cbffda] rounded-box z-[1] mt-3 p-2 shadow flex flex-col gap-2 text-white"
             >
               {links}
             </ul>
@@ -63,7 +63,7 @@ const Navbar = () => {
             />
           </Link>
         </div>
-        {/* Center */}
+        {/* Center for large device*/}
         <div className="navbar-center hidden md:flex lg:flex ">
           <ul className="menu gap-2 menu-horizontal px-1">{links}</ul>
         </div>

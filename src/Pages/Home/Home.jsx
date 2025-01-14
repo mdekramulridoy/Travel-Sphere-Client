@@ -6,7 +6,7 @@ const Home = () => {
         <div>
             <Helmet>
                 <title>
-                    Home | Travel-Sphere
+                    Homes | Travel-Sphere
                 </title>
             </Helmet>
             <Banner></Banner>
