@@ -1,59 +1,62 @@
-import React, { useState } from 'react';
-import registerAnimation from '../assets/lottie/signup.json';
-import { Link } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React, { useState } from "react";
+import registerAnimation from "../assets/lottie/signup.json";
+import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false);
 
-     const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-     const handleSignup = async (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const photo = e.target.photo.value;
-        console.log(email, password , photo);
-      };
+  const onSubmit = (data) => {
+    console.log("Form Data: ", data);
+  };
 
-    return (
-        <div className="hero bg-base-200 min-h-screen">
+  return (
+    <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content lg:flex-row md:flex-row flex-col">
-        {/* here animation */}
-
         <div className="text-center lg:w-[700px] md:w-[500px] w-[400px] lg:text-left">
           <Lottie animationData={registerAnimation}></Lottie>
         </div>
 
-        {/* here animation */}
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <div className="text-center pt-5">
-          <h1 className="text-5xl font-bold text-black">Signup now!</h1>
-        </div>
-          <form onSubmit={handleSignup} className="card-body">
+          <div className="text-center pt-5">
+            <h1 className="text-5xl font-bold text-black">Signup now!</h1>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Your Name</span>
               </label>
               <input
-                name="name"
+                {...register("name", { required: "Name is required" })}
                 type="text"
                 placeholder="Your Full Name"
                 className="input input-bordered text-black"
-                required
               />
+              {errors.name && (
+                <span className="text-red-600 mt-1">{errors.name.message}</span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Your Email</span>
               </label>
               <input
-                name="email"
+                {...register("email", { required: "Email is required" })}
                 type="email"
                 placeholder="Email"
                 className="input input-bordered text-black"
-                required
               />
+              {errors.email && (
+                <span className="text-red-600 mt-1">{errors.email.message}</span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -61,12 +64,28 @@ const Signup = () => {
               </label>
               <div className="relative">
                 <input
-                  name="password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Password must be less than 20 characters",
+                    },
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="input input-bordered w-full text-black"
-                  required
                 />
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600 mt-1">
+                    Password must have one Uppercase one lower case, one number
+                    and one special character.
+                  </p>
+                )}
                 <span
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute top-3 right-3 cursor-pointer"
@@ -78,22 +97,33 @@ const Signup = () => {
                   )}
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-600">{errors.password.message}</span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Your Photo URL</span>
               </label>
               <input
-                name="photo"
+                {...register("photo", { required: "Photo URL is required" })}
                 type="text"
                 placeholder="Photo URL"
                 className="input input-bordered text-black"
               />
+              {errors.photo && (
+                <span className="text-red-600">{errors.photo.message}</span>
+              )}
             </div>
-
             <div className="form-control flex flex-col items-center space-y-2 md:space-y-0 md:space-x-4">
               <label className="label flex items-center">
-                <input name="terms" type="checkbox" className="mr-2" />
+                <input
+                  {...register("terms", {
+                    required: "You must agree to the terms",
+                  })}
+                  type="checkbox"
+                  className="mr-2"
+                />
                 <span className="text-black text-sm">
                   I agree to the{" "}
                   <Link
@@ -104,29 +134,33 @@ const Signup = () => {
                   </Link>
                 </span>
               </label>
+              {errors.terms && (
+                <span className="text-red-600">{errors.terms.message}</span>
+              )}
               <div className="mt-2 md:mt-0">
-              <p className=" text-center text-black">
-            Already have an account?{" "}
-            <Link
-              className="font-bold text-red-600 hover:underline"
-              to="/login"
-            >
-              Sign Up
-            </Link>
-          </p>
+                <p className="text-center text-black">
+                  Already have an account?{" "}
+                  <Link
+                    className="font-bold text-red-600 hover:underline"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </p>
               </div>
             </div>
-
             <div className="form-control mt-6">
-              <input type="submit"
-                className="btn btn-primary bg-[#8BDEFF] text-black border-white hover:bg-[#4fcdff]" value="Sign Up" />
+              <input
+                type="submit"
+                className="btn btn-primary bg-[#8BDEFF] text-black border-white hover:bg-[#4fcdff]"
+                value="Sign Up"
+              />
             </div>
-     {/* Error here */}
           </form>
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Signup;

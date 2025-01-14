@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import loginAnimation from "../assets/lottie/login.json";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const {signIn} = useContext(AuthContext)
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    // const form = e.target;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    signIn(email, password)
+    .then(result => {
+      const user =result.user;
+      console.log(user);
+    })
+    // console.log(email, password);
   };
 
   return (
