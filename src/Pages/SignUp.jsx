@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import registerAnimation from "../assets/lottie/signup.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,17 +14,33 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const {createUser} = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-    .then(result =>{
+    createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("user profile info updated");
+          reset();
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Sign Up successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/');
+        })
+        .catch((error) => console.log(error));
       console.log(loggedUser);
-    })
+    });
     // console.log("Form Data: ", data);
   };
 

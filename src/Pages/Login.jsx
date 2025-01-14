@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import loginAnimation from "../assets/lottie/login.json";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
@@ -11,6 +11,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,28 +24,16 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
 
-      if (user) {
-        Swal.fire({
-          title: "Login Successful.",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-      } else {
-        Swal.fire({
-          title: "Login Failed, Try again",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-      }
-
+      Swal.fire({
+        title: "Login Successful.",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      navigate(from, { replace: true});
       // console.log(user);
     });
     // console.log(email, password);

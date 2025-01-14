@@ -15,26 +15,33 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/" className="px-2 py-1">
+        <NavLink to="/" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/about" className="px-2 py-1">
+        <NavLink to="/about" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
           About us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard"
+        className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+        >
+          Dashboard
         </NavLink>
       </li>
 
       {user ? (
         <>
-          <button onClick={handleLogOut} className="btn btn-ghost">
+          <NavLink onClick={handleLogOut} className="px-2 py-1 hover:bg-slate-100 rounded-xl">
             Logout
-          </button>
+          </NavLink>
         </>
       ) : (
         <>
           <li>
-            <NavLink to="/login" className="px-2 py-1">
+            <NavLink to="/login" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
               Login
             </NavLink>
           </li>
@@ -44,9 +51,9 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 bg-[#77d8ffda] px-4 lg:px-16 py-2 z-50 shadow-md backdrop-blur-lg">
+    <div className="sticky top-0 bg-[#77d8ffda] px-4 lg:px-16 py-2 z-50 shadow-md backdrop-blur-lg flex items-center justify-center">
       {/* Start */}
-      <div className="navbar">
+      <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown rounded-lg mr-2 bg-[#47cbffda]">
             <button
@@ -71,7 +78,7 @@ const Navbar = () => {
             </button>
             <ul
               tabIndex={0}
-              className="menu backdrop-blur-3xl menu-compact dropdown-content bg-[#47cbffda] rounded-box z-[1] mt-3 p-2 shadow flex flex-col gap-2 text-white"
+              className="menu backdrop-blur-3xl menu-compact dropdown-content bg-[#47cbffda] rounded-box z-[1] mt-3 p-2 shadow flex flex-col gap-2 text-white "
             >
               {links}
             </ul>
@@ -87,19 +94,18 @@ const Navbar = () => {
         </div>
         {/* Center for large device*/}
         <div className="navbar-center hidden md:flex lg:flex ">
-          <ul className="menu gap-2 menu-horizontal px-1">{links}</ul>
+          <ul className="menu gap-2 menu-horizontal px-1 flex items-center justify-center">{links}</ul>
         </div>
         {/* User login button Start*/}
         <div className="navbar-end">
           {user ? (
             <>
-              <button onClick={handleLogOut} className="btn btn-ghost">
-                Logout
-              </button>
+            
+            <span className="text-sm">{user?.displayName}</span>
             </>
           ) : (
             <>
-              <NavLink to="/login" className="px-2 py-1">
+              <NavLink to="/login" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
                 Login
               </NavLink>
             </>
