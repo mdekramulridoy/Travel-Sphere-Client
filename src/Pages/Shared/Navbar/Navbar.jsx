@@ -20,28 +20,37 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/about" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
+        <NavLink
+          to="/about"
+          className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+        >
           About us
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard"
-        className="px-2 py-1 hover:bg-slate-100 rounded-xl"
-        >
-          Dashboard
-        </NavLink>
-      </li>
+
 
       {user ? (
         <>
-          <NavLink onClick={handleLogOut} className="px-2 py-1 hover:bg-slate-100 rounded-xl">
+          <NavLink
+            to="/dashboard"
+            className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            onClick={handleLogOut}
+            className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+          >
             Logout
           </NavLink>
         </>
       ) : (
         <>
           <li>
-            <NavLink to="/login" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
+            <NavLink
+              to="/login"
+              className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+            >
               Login
             </NavLink>
           </li>
@@ -94,18 +103,22 @@ const Navbar = () => {
         </div>
         {/* Center for large device*/}
         <div className="navbar-center hidden md:flex lg:flex ">
-          <ul className="menu gap-2 menu-horizontal px-1 flex items-center justify-center">{links}</ul>
+          <ul className="menu gap-2 menu-horizontal px-1 flex items-center justify-center">
+            {links}
+          </ul>
         </div>
         {/* User login button Start*/}
         <div className="navbar-end">
           {user ? (
             <>
-            
-            <span className="text-sm">{user?.displayName}</span>
+              <span className="text-sm">{user?.displayName}</span>
             </>
           ) : (
             <>
-              <NavLink to="/login" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
+              <NavLink
+                to="/login"
+                className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+              >
                 Login
               </NavLink>
             </>
