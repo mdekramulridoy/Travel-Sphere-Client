@@ -29,7 +29,7 @@ const TourGuideDetails = () => {
   return (
     <div className="container mx-auto p-10">
       <h1 className="text-3xl font-bold text-center mb-5">{name}</h1>
-      <img src={image} alt={name} className="w-[1080px] h-[520px] object-cover rounded-lg mb-5" />
+      <img src={image} alt={name} className="w-[1080px] lg:h-[520px] object-cover rounded-lg mb-5" />
 
       <p className="text-lg text-center font-bold mb-2">Specialization: {specialization}</p>
         <p className="text-gray-600 mb-4 text-center">{bio}</p>

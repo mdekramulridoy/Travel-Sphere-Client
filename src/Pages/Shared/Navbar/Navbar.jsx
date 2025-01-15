@@ -62,7 +62,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 bg-[#77d8ffda] px-4 lg:px-16 py-2 z-50 shadow-md backdrop-blur-lg flex items-center justify-center">
+    <div className="sticky top-0 bg-[#77d8ffda] px-5 lg:px-16 py-2 z-50 shadow-md backdrop-blur-lg flex items-center justify-center">
       {/* Start */}
       <div className="navbar ">
         <div className="navbar-start">

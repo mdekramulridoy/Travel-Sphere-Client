@@ -34,7 +34,7 @@ const TourismAndTravel = () => {
   }, []);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-5">
       <h2 className="text-center text-3xl font-bold py-5">
         Tourism and Travel Guide
       </h2>
@@ -95,7 +95,7 @@ const TourismAndTravel = () => {
                   <img
                     src={guide.image}
                     alt={guide.name}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
+                    className="w-full  object-cover rounded-lg mb-4 md:h-[400px] h-[300px]"
                   />
                   <h4 className="text-xl font-semibold">{guide.name}</h4>
                   <p className="text-gray-600">{guide.bio}</p>
