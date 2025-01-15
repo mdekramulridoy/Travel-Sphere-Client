@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const TourGuideDetails = () => {
+    const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [guideDetails, setGuideDetails] = useState(null);
 
   useEffect(() => {
     const fetchGuideDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/tour-guide-profile/${id}`);
+        const response = await axiosSecure.get(`/tour-guide-profile/${id}`);
         setGuideDetails(response.data);
       } catch (error) {
         console.error('Error fetching tour guide details:', error);

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const PackagesDetails = () => {
+    
   const { id } = useParams();
   const [packageDetails, setPackageDetails] = useState(null);
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const TourismAndTravel = () => {
+  const axiosSecure = useAxiosSecure();
   const [packages, setPackages] = useState([]);
   const [tourGuides, setTourGuides] = useState([]);
 
@@ -11,9 +12,7 @@ const TourismAndTravel = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/random-packages"
-        );
+        const response = await axiosSecure.get("/random-packages");
         setPackages(response.data);
       } catch (error) {
         console.error("Error fetching packages:", error);
@@ -23,7 +22,7 @@ const TourismAndTravel = () => {
     // Fetch random tour guides
     const fetchTourGuides = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/random-guides");
+        const response = await axiosSecure.get("/random-guides");
         setTourGuides(response.data);
       } catch (error) {
         console.error("Error fetching tour guides:", error);
@@ -72,7 +71,7 @@ const TourismAndTravel = () => {
                 <div>
                   <button
                     onClick={() =>
-                      (window.location.href = `/packages/${pkg._id}`)
+                      (window.location.href = `/package-details/${pkg._id}`)
                     }
                     className="mt-4 px-6 py-2 bg-[#89DDFE] text-black text-sm font-bold rounded-lg hover:bg-[#45caff] hover:text-white"
                   >
