@@ -8,7 +8,7 @@ import img3 from '../../assets/3.jpg';
 
 const Banner = () => {
   return (
-    <Carousel>
+    <Carousel className="container mx-auto">
       <div>
         <img src={img1} />
       </div>
