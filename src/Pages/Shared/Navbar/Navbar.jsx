@@ -15,14 +15,14 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/" className="px-2 py-1 hover:bg-slate-100 rounded-xl">
+        <NavLink to="/" className="px-2 py-1 hover:bg-slate-100 rounded-xl border">
           Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/about"
-          className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+          className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
         >
           About us
         </NavLink>
@@ -33,7 +33,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/dashboard"
-              className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+              className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
             >
               Dashboard
             </NavLink>
@@ -41,7 +41,7 @@ const Navbar = () => {
 
           <NavLink
             onClick={handleLogOut}
-            className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+            className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
           >
             Logout
           </NavLink>

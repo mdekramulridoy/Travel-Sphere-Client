@@ -17,11 +17,11 @@ const DashBoard = () => {
       <div
         className={`transition-all duration-300 ${
           isExpanded ? "w-64" : "w-16"
-        } bg-base-200 min-h-screen flex flex-col`}
+        } bg-[#8BDEFF] min-h-screen flex flex-col`}
       >
         <button
           onClick={toggleSidebar}
-          className="btn btn-ghost text-lg mb-4 mt-4 self-center"
+          className="btn bg-[#6ed6ffa5] btn-ghost text-lg mb-4 mt-4 self-center"
           aria-label="Toggle Sidebar"
         >
           <FaBars />
