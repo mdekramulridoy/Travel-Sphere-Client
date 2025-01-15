@@ -6,6 +6,8 @@ import Login from "../Pages/Login";
 import Signup from "../Pages/SignUp";
 import DashBoard from "../Pages/Shared/Protected/DashBoard";
 import PrivateRoute from "./PrivateRoute";
+import PackagesDetails from "../Details/PackagesDetails";
+import TourGuideDetails from "../Details/TourGuideDetails";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
             <DashBoard></DashBoard>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "package-details/:id",
+        element: <PackagesDetails></PackagesDetails>,
+      },
+      {
+        path: "tour-guide-profile/:id",
+        element: <TourGuideDetails></TourGuideDetails>,
       },
     ],
   },

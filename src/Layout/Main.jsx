@@ -12,7 +12,7 @@ const Main = () => {
 
         { noHeaderFooter || <Navbar></Navbar>}
 
-      <div>
+      <div className="bg-slate-100">
         <Outlet></Outlet>
       </div>
 
