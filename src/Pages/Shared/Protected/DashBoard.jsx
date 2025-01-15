@@ -52,7 +52,7 @@ const DashBoard = () => {
       {/* Main Content */}
       <div className="flex-1 p-5">
         <h1 className="text-3xl font-bold">Welcome to the Dashboard</h1>
-        <p>User: {user?.displayName || "Anonymous"}</p>
+        <p>{user?.displayName || "Anonymous"}</p>
       </div>
     </div>
   );

@@ -33,6 +33,7 @@ firebase.config.js
 # Build files
 dist/
 
+dist
 # Node modules
 node_modules/
 #tooltip&data
