@@ -28,15 +28,17 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-
       {user ? (
         <>
-          <NavLink
-            to="/dashboard"
-            className="px-2 py-1 hover:bg-slate-100 rounded-xl"
-          >
-            Dashboard
-          </NavLink>
+          <li>
+            <NavLink
+              to="/dashboard"
+              className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+            >
+              Dashboard
+            </NavLink>
+          </li>
+
           <NavLink
             onClick={handleLogOut}
             className="px-2 py-1 hover:bg-slate-100 rounded-xl"
