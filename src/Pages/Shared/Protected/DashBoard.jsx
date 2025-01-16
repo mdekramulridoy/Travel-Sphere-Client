@@ -5,9 +5,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { MdManageHistory, MdTour } from "react-icons/md";
 import { SiStorybook } from "react-icons/si";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const DashBoard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   const { user } = UseAuth();
   const [isExpanded, setIsExpanded] = useState(true);
@@ -99,7 +100,7 @@ const DashBoard = () => {
               <li>
                 {isExpanded && (
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/manage-profile"
                     className="flex items-center space-x-4 p-2 hover:bg-white"
                   >
                     <FaCog className="mr-5" />
@@ -110,7 +111,7 @@ const DashBoard = () => {
               <li>
                 {isExpanded && (
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/my-booking"
                     className="flex items-center space-x-4 p-2 hover:bg-white"
                   >
                     <FaCog className="mr-5" />
