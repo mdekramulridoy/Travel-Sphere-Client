@@ -7,8 +7,11 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import SocialLogin from "./Shared/SocialLogin";
 
 const Signup = () => {
+  const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -26,20 +29,30 @@ const Signup = () => {
       const loggedUser = result.user;
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
-          reset();
+          // console.log("user profile info updated");
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added to the database.");
 
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Sign Up successful",
-            showConfirmButton: false,
-            timer: 1500,
+              reset();
+
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Sign Up successful",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
           });
-          navigate('/');
         })
         .catch((error) => console.log(error));
-      console.log(loggedUser);
+      // console.log(loggedUser);
     });
     // console.log("Form Data: ", data);
   };
@@ -193,6 +206,8 @@ const Signup = () => {
                   value="Sign Up"
                 />
               </div>
+              <div className="divider mx-10"></div>
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>

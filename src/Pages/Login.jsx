@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import loginAnimation from "../assets/lottie/login.json";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "./Shared/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +16,6 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-
   const handleLogin = async (e) => {
     e.preventDefault();
     // const form = e.target;
@@ -33,7 +33,7 @@ const Login = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-      navigate(from, { replace: true});
+      navigate(from, { replace: true });
       // console.log(user);
     });
     // console.log(email, password);
@@ -115,13 +115,8 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
-
-            <div className="mb-4 flex justify-center">
-              <button className="btn bg-white hover:bg-blue-600 text-green-500 font-bold text-lg flex gap-3 border-2">
-                <FaGoogle className="border-green-500"></FaGoogle>
-                <h1 className="text-black">Sign In With Google</h1>
-              </button>
-            </div>
+            <div className="divider mx-10"></div>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
