@@ -8,6 +8,7 @@ import DashBoard from "../Pages/Shared/Protected/DashBoard";
 import PrivateRoute from "./PrivateRoute";
 import PackagesDetails from "../Details/PackagesDetails";
 import TourGuideDetails from "../Details/TourGuideDetails";
+import Users from "../Pages/Shared/Protected/dashboard/Users";
 
 export const router = createBrowserRouter([
   {
@@ -55,9 +56,13 @@ export const router = createBrowserRouter([
         <DashBoard></DashBoard>
       </PrivateRoute>
     ),
-    children: [{
-      path: "",
-      element: "",
-    }]
+    children: [
+      // admin user
+      // for test user
+      {
+      path: "users",
+      element: <Users></Users>,
+    },
+  ]
   },
 ]);

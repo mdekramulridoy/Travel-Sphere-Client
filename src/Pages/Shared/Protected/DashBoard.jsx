@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
-import { FaBars, FaHome, FaUser, FaCog } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaBars, FaCog, FaUsers } from "react-icons/fa";
+import { NavLink, Outlet } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { MdManageHistory, MdTour } from "react-icons/md";
+import { SiStorybook } from "react-icons/si";
 
 const DashBoard = () => {
+  const isAdmin = true;
+
   const { user } = UseAuth();
-  const [isExpanded, setIsExpanded] = useState(true); 
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -27,32 +32,101 @@ const DashBoard = () => {
           <FaBars />
         </button>
 
-        <ul className="menu p-10">
-         
-          {isExpanded && (
-            <Link to="/" className="flex items-center space-x-4 p-2 hover:bg-white">
-             <FaHome className="mr-5" />Home
-            </Link>
-          )}
-          {isExpanded && (
-            <Link to="" className="flex items-center space-x-4 p-2 hover:bg-white">
-             <FaUser className="mr-5" />User
-            </Link>
-          )}
-          {isExpanded && (
-            <Link to="" className="flex items-center space-x-4 p-2 hover:bg-white">
-             <FaCog className="mr-5" />Settings
-            </Link>
-          )}
-
-          
-        </ul>
+        {isAdmin ? (
+          <>
+            <ul className="menu p-10 gap-2">
+              <li>
+                {" "}
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard/admin"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <CgProfile className="mr-5" />
+                    Manage profile
+                  </NavLink>
+                )}
+              </li>
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard/assigned-tour"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <MdTour className="mr-5" />
+                    My Assigned Tours
+                  </NavLink>
+                )}
+              </li>
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard/add-stories"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <SiStorybook className="mr-5" />
+                    Add Stories
+                  </NavLink>
+                )}
+              </li>
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard/manage-stories"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <MdManageHistory className="mr-5" />
+                    Manage Stories
+                  </NavLink>
+                )}
+              </li>
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard/users"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <FaUsers className="mr-5" />
+                    Users
+                  </NavLink>
+                )}
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <ul className="menu p-10">
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <FaCog className="mr-5" />
+                    Manage profile
+                  </NavLink>
+                )}
+              </li>
+              <li>
+                {isExpanded && (
+                  <NavLink
+                    to="/dashboard"
+                    className="flex items-center space-x-4 p-2 hover:bg-white"
+                  >
+                    <FaCog className="mr-5" />
+                    My Bookings
+                  </NavLink>
+                )}
+              </li>
+            </ul>
+          </>
+        )}
       </div>
 
       {/* Main Content */}
       <div className="flex-1 p-5">
         <h1 className="text-3xl font-bold">Welcome to the Dashboard</h1>
-        <p>{user?.displayName || "Anonymous"}</p>
+        <Outlet></Outlet>
       </div>
     </div>
   );
