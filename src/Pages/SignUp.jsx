@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import registerAnimation from "../assets/lottie/signup.json";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,30 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import SocialLogin from "./Shared/SocialLogin";
+
+// Function to upload image to imgbb
+const uploadImageToImgbb = async (imageFile) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  try {
+    const imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
+    const response = await fetch(
+      `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+    // console.log(data);
+    return data.success ? data.data.display_url : null;
+  } catch (error) {
+    console.error("Image upload failed:", error);
+    return null;
+  }
+};
 
 const Signup = () => {
   const axiosPublic = useAxiosPublic();
@@ -24,22 +48,28 @@ const Signup = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const imageFile = data.image[0];
+
+    // Upload image to imgbb
+    const photoURL = await uploadImageToImgbb(imageFile);
+    if (!photoURL) {
+      Swal.fire("Image upload failed!", "Please try again.", "error");
+      return;
+    }
+
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      updateUserProfile(data.name, data.photoURL)
+      updateUserProfile(data.name, photoURL)
         .then(() => {
-          // console.log("user profile info updated");
           const userInfo = {
             name: data.name,
             email: data.email,
+            photoURL: photoURL,
           };
           axiosPublic.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              // console.log("user added to the database.");
-
               reset();
-
               Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -52,9 +82,7 @@ const Signup = () => {
           });
         })
         .catch((error) => console.log(error));
-      // console.log(loggedUser);
     });
-    // console.log("Form Data: ", data);
   };
 
   return (
@@ -67,7 +95,6 @@ const Signup = () => {
           <div className="text-center lg:w-[700px] md:w-[500px] w-[400px] lg:text-left">
             <Lottie animationData={registerAnimation}></Lottie>
           </div>
-
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="text-center pt-5">
               <h1 className="text-5xl font-bold text-black">Signup now!</h1>
@@ -117,10 +144,6 @@ const Signup = () => {
                         value: 6,
                         message: "Password must be at least 6 characters",
                       },
-                      maxLength: {
-                        value: 20,
-                        message: "Password must be less than 20 characters",
-                      },
                       pattern:
                         /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                     })}
@@ -130,8 +153,8 @@ const Signup = () => {
                   />
                   {errors.password?.type === "pattern" && (
                     <p className="text-red-600 mt-1">
-                      Password must have one Uppercase one lower case, one
-                      number and one special character.
+                      Password must have one Uppercase, one lowercase, one
+                      number, and one special character.
                     </p>
                   )}
                   <span
@@ -153,51 +176,17 @@ const Signup = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Your Photo URL</span>
+                  <span className="label-text">Your Photo</span>
                 </label>
                 <input
-                  {...register("photo", { required: "Photo URL is required" })}
-                  type="text"
-                  placeholder="Photo URL"
+                  {...register("image", { required: "Photo is required" })}
+                  type="file"
+                  accept="image/*"
                   className="input input-bordered text-black"
                 />
-                {errors.photo && (
-                  <span className="text-red-600">{errors.photo.message}</span>
+                {errors.image && (
+                  <span className="text-red-600">{errors.image.message}</span>
                 )}
-              </div>
-              <div className="form-control flex flex-col items-center space-y-2 md:space-y-0 md:space-x-4">
-                <label className="label flex items-center">
-                  <input
-                    {...register("terms", {
-                      required: "You must agree to the terms",
-                    })}
-                    type="checkbox"
-                    className="mr-2"
-                  />
-                  <span className="text-black text-sm">
-                    I agree to the{" "}
-                    <Link
-                      to="/terms"
-                      className="font-bold text-black hover:underline"
-                    >
-                      terms & conditions
-                    </Link>
-                  </span>
-                </label>
-                {errors.terms && (
-                  <span className="text-red-600">{errors.terms.message}</span>
-                )}
-                <div className="mt-2 md:mt-0">
-                  <p className="text-center text-black">
-                    Already have an account?{" "}
-                    <Link
-                      className="font-bold text-red-600 hover:underline"
-                      to="/login"
-                    >
-                      Login
-                    </Link>
-                  </p>
-                </div>
               </div>
               <div className="form-control mt-6">
                 <input
