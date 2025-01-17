@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import loginAnimation from "../assets/lottie/login.json";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
@@ -7,9 +7,13 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SocialLogin from "./Shared/SocialLogin";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../Firebase/firebase.init";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const emailRef = useRef();
 
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -39,6 +43,26 @@ const Login = () => {
     // console.log(email, password);
   };
 
+
+
+  const handleForgetPassword = () =>{
+    const email = emailRef.current.value;
+    if(!email){
+      console.log('enter valid email');
+    } else {
+      sendPasswordResetEmail(auth, email)
+      .then(() =>{
+        Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Password reset email sent",
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+      })
+    }
+  }
+
   return (
     <>
       <Helmet>
@@ -64,6 +88,7 @@ const Login = () => {
                 </label>
                 <input
                   name="email"
+                  ref={emailRef}
                   type="email"
                   placeholder="email"
                   className="input text-black input-bordered"
@@ -81,7 +106,7 @@ const Login = () => {
                   className="input text-black input-bordered"
                   required
                 />
-                <label className="label">
+                <label onClick={handleForgetPassword} className="label">
                   <Link
                     href="#"
                     className="label-text-alt text-blue-500 link link-hover"
