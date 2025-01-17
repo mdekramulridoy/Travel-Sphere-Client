@@ -43,7 +43,7 @@ const DashBoard = () => {
                 <li>
                   {isExpanded && (
                     <NavLink
-                      to="/dashboard/admin"
+                      to="/dashboard/profile"
                       className="flex items-center space-x-4 p-2 hover:bg-white"
                     >
                       <CgProfile className="mr-5" />
@@ -54,7 +54,7 @@ const DashBoard = () => {
                 <li>
                   {isExpanded && (
                     <NavLink
-                      to="/dashboard/assigned-tour"
+                      to="/dashboard/admin-assigned-tours"
                       className="flex items-center space-x-4 p-2 hover:bg-white"
                     >
                       <MdTour className="mr-5" />
@@ -103,7 +103,7 @@ const DashBoard = () => {
                 <li>
                   {isExpanded && (
                     <NavLink
-                      to="/dashboard/manage-profile"
+                      to="/dashboard/profile"
                       className="flex items-center space-x-4 p-2 hover:bg-white"
                     >
                       <FaCog className="mr-5" />
@@ -114,11 +114,44 @@ const DashBoard = () => {
                 <li>
                   {isExpanded && (
                     <NavLink
-                      to="/dashboard/my-booking"
+                      to="/dashboard/tourist-booking"
                       className="flex items-center space-x-4 p-2 hover:bg-white"
                     >
                       <FaCog className="mr-5" />
                       My Bookings
+                    </NavLink>
+                  )}
+                </li>
+                <li>
+                  {isExpanded && (
+                    <NavLink
+                      to="/dashboard/manage-stories"
+                      className="flex items-center space-x-4 p-2 hover:bg-white"
+                    >
+                      <FaCog className="mr-5" />
+                      Manage Stories
+                    </NavLink>
+                  )}
+                </li>
+                <li>
+                  {isExpanded && (
+                    <NavLink
+                      to="/dashboard/add-stories"
+                      className="flex items-center space-x-4 p-2 hover:bg-white"
+                    >
+                      <FaCog className="mr-5" />
+                      Add Stories
+                    </NavLink>
+                  )}
+                </li>
+                <li>
+                  {isExpanded && (
+                    <NavLink
+                      to="/dashboard/join-as-tour-guide"
+                      className="flex items-center space-x-4 p-2 hover:bg-white"
+                    >
+                      <FaCog className="mr-5" />
+                      Join as tour guide
                     </NavLink>
                   )}
                 </li>

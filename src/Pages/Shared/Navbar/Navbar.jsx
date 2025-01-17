@@ -16,12 +16,18 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/" className="px-2 py-1 hover:bg-slate-100 rounded-xl border">
+        <NavLink
+          to="/"
+          className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/community" className="px-2 py-1 hover:bg-slate-100 rounded-xl border">
+        <NavLink
+          to="/community"
+          className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
+        >
           Community
         </NavLink>
       </li>
@@ -34,7 +40,10 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/trips" className="px-2 py-1 hover:bg-slate-100 rounded-xl border">
+        <NavLink
+          to="/trips"
+          className="px-2 py-1 hover:bg-slate-100 rounded-xl border"
+        >
           Trips
         </NavLink>
       </li>
@@ -82,13 +91,16 @@ const Navbar = () => {
                 <div tabIndex={0} className="avatar cursor-pointer w-10 h-10">
                   <img
                     className="w-full h-full rounded-full"
-                    src={user.photoURL || "https://i.ibb.co.com/ph6PK0H/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"}
+                    src={
+                      user.photoURL ||
+                      "https://i.ibb.co.com/ph6PK0H/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+                    }
                     alt="User Profile"
                   />
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box shadow-lg w-52 mt-3 p-2"
+                  className="dropdown-content menu bg-base-100 rounded-box shadow-lg w-52 mt-3"
                 >
                   <li className="px-2 py-1 text-gray-600 font-bold">
                     {user.displayName || "User Name"}
@@ -96,10 +108,11 @@ const Navbar = () => {
                   <li className="px-2 py-1 text-gray-500 text-sm">
                     {user.email || "user@example.com"}
                   </li>
+                  <div className="divider"></div>
                   <li>
                     <NavLink
                       to="/dashboard"
-                      className="px-2 py-1 hover:bg-slate-100 rounded-md"
+                      className="px-2 py-1 hover:bg-[#8bdeff73] rounded-md mb-2"
                     >
                       Dashboard
                     </NavLink>
@@ -107,7 +120,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleLogOut}
-                      className="px-2 py-1 hover:bg-slate-100 rounded-md text-red-500"
+                      className="px-2 py-1 hover:bg-[#8bdeff73] font-bold rounded-md text-red-500"
                     >
                       Logout
                     </button>
@@ -118,7 +131,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to="/login"
-              className="px-2 py-1 hover:bg-slate-100 rounded-xl"
+              className="px-2 border py-1 hover:bg-slate-100 rounded-xl"
             >
               Login
             </NavLink>

@@ -12,6 +12,17 @@ import Users from "../Pages/Shared/Protected/dashboard/Users";
 import Community from "../Pages/Community/Community";
 import Trips from "../Pages/Community/Trips/Trips";
 
+import MyBookings from "../Pages/Shared/Protected/Tourist/MyBookings";
+
+
+import JoinAsGuide from "../Pages/Shared/Protected/Tourist/JoinAsGuide";
+
+import AdminAssignedTour from "../Pages/Shared/Protected/Admin/AdminAssignedTour";
+import MyProfile from "../Pages/Shared/Protected/Common/MyProfile";
+import AddStory from "../Pages/Shared/Protected/Common/AddStory";
+import ManageStory from "../Pages/Shared/Protected/Common/ManageStory";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +40,7 @@ export const router = createBrowserRouter([
         path: "about",
         element: <About></About>,
       },
+
       {
         path: "trips",
         element: <Trips></Trips>,
@@ -41,14 +53,7 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <Signup></Signup>,
       },
-      {
-        path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <DashBoard></DashBoard>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "package-details/:id",
         element: <PackagesDetails></PackagesDetails>,
@@ -68,11 +73,42 @@ export const router = createBrowserRouter([
     ),
     children: [
       // admin user
+      {
+        path: "profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "add-stories",
+        element: <AddStory></AddStory>,
+      },
+      {
+        path: "manage-stories",
+        element: <ManageStory></ManageStory>,
+      },
+      {
+        path: "admin-assigned-tours",
+        element: <AdminAssignedTour></AdminAssignedTour>,
+      },
+
+
+ 
+      
       // for test user
       {
-      path: "users",
-      element: <Users></Users>,
-    },
-  ]
+        path: "users",
+        element: <Users></Users>,
+      },
+      // that is for test
+
+      {
+        path: "tourist-booking",
+        element: <MyBookings></MyBookings>,
+      },
+
+      {
+        path: "join-as-tour-guide",
+        element: <JoinAsGuide></JoinAsGuide>,
+      },
+    ],
   },
 ]);

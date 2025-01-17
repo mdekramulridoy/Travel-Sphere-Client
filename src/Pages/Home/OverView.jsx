@@ -3,7 +3,7 @@ import React from 'react';
 const OverView = () => {
     return (
         <div className="md:mx-20 mx-10 lg:mx-0">
-            <h1 className="text-2xl font-bold mb-5 text-center">This is Overview</h1>
+            <h1 className="text-2xl font-bold mb-5 text-center">Overview section</h1>
             
             <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
                 <iframe
