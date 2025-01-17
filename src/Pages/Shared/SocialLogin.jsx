@@ -15,11 +15,12 @@ const SocialLogin = () => {
       const userInfo = {
         email: result.user?.email,
         name: result.user?.displayName,
+        photoURL: result.user?.photoURL,
       };
       const response = await axiosPublic.post("/users", userInfo);
 
       if (response.status === 200) {
-        console.log("User logged in successfully:", response.data);
+        // console.log("User logged in successfully:", response.data);
         navigate("/");
       } else {
         console.error("Failed to save user data:", response.data);

@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import PackagesDetails from "../Details/PackagesDetails";
 import TourGuideDetails from "../Details/TourGuideDetails";
 import Users from "../Pages/Shared/Protected/dashboard/Users";
+import Community from "../Pages/Community/Community";
+import Trips from "../Pages/Community/Trips/Trips";
 
 export const router = createBrowserRouter([
   {
@@ -20,8 +22,16 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "community",
+        element: <Community></Community>,
+      },
+      {
         path: "about",
         element: <About></About>,
+      },
+      {
+        path: "trips",
+        element: <Trips></Trips>,
       },
       {
         path: "login",
