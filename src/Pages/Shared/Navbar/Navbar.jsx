@@ -112,7 +112,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/dashboard"
-                      className="px-2 py-1 hover:bg-[#8bdeff73] rounded-md mb-2"
+                      className="px-2 py-1 hover:bg-[#8bdeff73] rounded-md mb-2 border"
                     >
                       Dashboard
                     </NavLink>
@@ -120,7 +120,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleLogOut}
-                      className="px-2 py-1 hover:bg-[#8bdeff73] font-bold rounded-md text-red-500"
+                      className="px-2 py-1 hover:bg-[#8bdeff73] font-bold rounded-md text-red-500 border"
                     >
                       Logout
                     </button>
