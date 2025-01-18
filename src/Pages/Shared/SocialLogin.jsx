@@ -5,7 +5,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-  const { googleSignIn } = UseAuth();
+  const { googleSignIn, user, applyAsGuide } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -17,11 +17,16 @@ const SocialLogin = () => {
         name: result.user?.displayName,
         photoURL: result.user?.photoURL,
       };
+
+      // Save user to the database
       const response = await axiosPublic.post("/users", userInfo);
 
       if (response.status === 200) {
-        // console.log("User logged in successfully:", response.data);
-        navigate("/");
+        // Check if the user is already a guide
+        if (user) {
+          await applyAsGuide(); // Apply as guide if user logged in
+        }
+        navigate("/"); // Navigate to home page after successful login
       } else {
         console.error("Failed to save user data:", response.data);
       }

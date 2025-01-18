@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
 import OverView from "./OverView";
-import TourAndTravel from "./TourAndTravel/TourAndTravel";
 import StorySectionHome from "./TourAndTravel/StorySectionHome";
 import ExtraTwoSection from "./ExtraTwoSection";
 import ExtraOneSection from "./ExtraOneSection";
@@ -14,7 +13,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <OverView></OverView>
-      <TourAndTravel></TourAndTravel>
+      {/* <TourAndTravel></TourAndTravel> */}
       <StorySectionHome></StorySectionHome>
       <ExtraOneSection></ExtraOneSection>
       <ExtraTwoSection></ExtraTwoSection>

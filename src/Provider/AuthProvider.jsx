@@ -14,8 +14,10 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState("tourist");
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
@@ -37,7 +39,11 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth).finally(() => {
+      setUser(null);
+      setRole("tourist");
+      setLoading(false);
+    });
   };
 
   const updateUserProfile = (name, photo) => {
@@ -47,30 +53,49 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const setUserRole = async (email) => {
+    const token = localStorage.getItem("access-token");
+    try {
+      const res = await axiosPublic.get(`/users/role/${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setRole(res.data?.role || "tourist");
+    } catch (err) {
+      console.error("Error setting user role:", err);
+      setRole("tourist");
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      // console.log(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
+        setUser(currentUser);
         const userInfo = { email: currentUser.email };
-        axiosPublic.post("jwt", userInfo).then((res) => {
+        try {
+          const res = await axiosPublic.post("jwt", userInfo);
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
           }
-        });
+          await setUserRole(currentUser.email);
+        } catch (err) {
+          console.error("Error setting JWT token or user role:", err);
+        }
       } else {
+        setUser(null);
+        setRole("tourist");
         localStorage.removeItem("access-token");
       }
       setLoading(false);
     });
-    return () => {
-      return unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
     user,
     loading,
+    role,
     createUser,
     signIn,
     googleSignIn,

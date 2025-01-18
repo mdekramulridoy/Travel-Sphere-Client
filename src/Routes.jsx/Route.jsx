@@ -3,25 +3,13 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
 import Login from "../Pages/Login";
-import Signup from "../Pages/SignUp";
+import Signup from "../Pages/Signup";
 import DashBoard from "../Pages/Shared/Protected/DashBoard";
 import PrivateRoute from "./PrivateRoute";
-import PackagesDetails from "../Details/PackagesDetails";
-import TourGuideDetails from "../Details/TourGuideDetails";
-import Users from "../Pages/Shared/Protected/dashboard/Users";
 import Community from "../Pages/Community/Community";
 import Trips from "../Pages/Community/Trips/Trips";
-
-import MyBookings from "../Pages/Shared/Protected/Tourist/MyBookings";
-
-
-import JoinAsGuide from "../Pages/Shared/Protected/Tourist/JoinAsGuide";
-
-import AdminAssignedTour from "../Pages/Shared/Protected/Admin/AdminAssignedTour";
-import MyProfile from "../Pages/Shared/Protected/Common/MyProfile";
-import AddStory from "../Pages/Shared/Protected/Common/AddStory";
-import ManageStory from "../Pages/Shared/Protected/Common/ManageStory";
-
+import JoinAsTourGuide from "../Pages/Shared/Protected/Tourist/JoinAsTourGuide";
+import GuideApplications from "../Pages/Shared/Protected/Admin/GuideApplications";
 
 export const router = createBrowserRouter([
   {
@@ -53,15 +41,6 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <Signup></Signup>,
       },
-
-      {
-        path: "package-details/:id",
-        element: <PackagesDetails></PackagesDetails>,
-      },
-      {
-        path: "tour-guide-profile/:id",
-        element: <TourGuideDetails></TourGuideDetails>,
-      },
     ],
   },
   {
@@ -72,42 +51,11 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // admin user
       {
-        path: "profile",
-        element: <MyProfile></MyProfile>,
+         path: "join-as-tour-guide", element: <JoinAsTourGuide></JoinAsTourGuide>
       },
       {
-        path: "add-stories",
-        element: <AddStory></AddStory>,
-      },
-      {
-        path: "manage-stories",
-        element: <ManageStory></ManageStory>,
-      },
-      {
-        path: "admin-assigned-tours",
-        element: <AdminAssignedTour></AdminAssignedTour>,
-      },
-
-
- 
-      
-      // for test user
-      {
-        path: "users",
-        element: <Users></Users>,
-      },
-      // that is for test
-
-      {
-        path: "tourist-booking",
-        element: <MyBookings></MyBookings>,
-      },
-
-      {
-        path: "join-as-tour-guide",
-        element: <JoinAsGuide></JoinAsGuide>,
+         path: "guideApplications", element: <GuideApplications></GuideApplications>
       },
     ],
   },
