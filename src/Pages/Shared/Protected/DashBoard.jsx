@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
 import { FaBars, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
+import { CgHome, CgProfile } from "react-icons/cg";
 import { MdManageHistory, MdTour } from "react-icons/md";
 import { SiStorybook } from "react-icons/si";
 import Footer from "../Footer";
@@ -18,6 +18,11 @@ const DashBoard = () => {
   // Role-Based Menu Configuration
   const menuConfig = {
     admin: [
+      {
+        to: "/",
+        icon: <CgHome />,
+        label: "Home",
+      },
       {
         to: "/dashboard/profile",
         icon: <CgProfile />,
@@ -47,6 +52,11 @@ const DashBoard = () => {
     ],
     guide: [
       {
+        to: "/",
+        icon: <CgHome />,
+        label: "Home",
+      },
+      {
         to: "/dashboard/profile",
         icon: <CgProfile />,
         label: "Manage Profile",
@@ -59,6 +69,11 @@ const DashBoard = () => {
       },
     ],
     tourist: [
+      {
+        to: "/",
+        icon: <CgHome />,
+        label: "Home",
+      },
       {
         to: "/dashboard/profile",
         icon: <CgProfile />,
