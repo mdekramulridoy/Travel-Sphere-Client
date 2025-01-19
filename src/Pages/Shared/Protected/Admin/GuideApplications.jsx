@@ -61,6 +61,33 @@ const GuideApplications = () => {
     }
   };
 
+  const handleReject = async (applicationId) => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/guideApplications/${applicationId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+          body: JSON.stringify({ status: "rejected" }),
+        }
+      );
+
+      if (response.ok) {
+        alert("Tour guide application rejected.");
+        setApplications((prev) =>
+          prev.filter((app) => app._id !== applicationId)
+        );
+      } else {
+        alert("Error rejecting the guide application.");
+      }
+    } catch (err) {
+      console.error("Error rejecting the guide application", err);
+    }
+  };
+
   if (role !== "admin") {
     return <p>Unauthorized! Only admins can access this page.</p>;
   }
@@ -71,7 +98,7 @@ const GuideApplications = () => {
       {loading ? (
         <p className="text-center text-blue-500">Loading applications...</p>
       ) : applications.length > 0 ? (
-        <ul className="space-y-6">
+        <ul className="space-y-6 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {applications.map((application) => (
             <li
               key={application._id}
@@ -85,16 +112,24 @@ const GuideApplications = () => {
                 href={application.cvLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 underline mb-4 inline-block"
+                className="mb-4 mr-4 border p-2 inline-block px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
               >
                 View CV
               </a>
-              <button
-                onClick={() => handleAccept(application._id, application.email)}
-                className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
-              >
-                Accept
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => handleAccept(application._id, application.email)}
+                  className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={() => handleReject(application._id)}
+                  className="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600"
+                >
+                  {application.status === "rejected" ? "Rejected Done" : "Reject"}
+                </button>
+              </div>
             </li>
           ))}
         </ul>
