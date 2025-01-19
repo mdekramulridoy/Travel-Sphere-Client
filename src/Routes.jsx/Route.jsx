@@ -10,6 +10,7 @@ import Community from "../Pages/Community/Community";
 import Trips from "../Pages/Community/Trips/Trips";
 import JoinAsTourGuide from "../Pages/Shared/Protected/Tourist/JoinAsTourGuide";
 import GuideApplications from "../Pages/Shared/Protected/Admin/GuideApplications";
+import ManageUsers from "../Pages/Shared/Protected/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,9 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+         path: "manage-users", element: <ManageUsers></ManageUsers>
+      },
       {
          path: "join-as-tour-guide", element: <JoinAsTourGuide></JoinAsTourGuide>
       },

@@ -48,7 +48,7 @@ const DashBoard = () => {
         icon: <MdManageHistory />,
         label: "Manage Stories",
       },
-      { to: "/dashboard/users", icon: <FaUsers />, label: "Users" },
+      { to: "/dashboard/manage-users", icon: <FaUsers />, label: "Manage Users" },
     ],
     guide: [
       {
