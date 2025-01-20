@@ -240,7 +240,7 @@ const PackagesDetails = () => {
             </p>
             <div className="mt-4 flex flex-col items-center text-center gap-3">
               <button
-                onClick={() => navigate("/my-bookings")}
+                onClick={() => navigate("/dashboard/my-bookings")}
                 className="px-6 py-2 bg-blue-600 text-white rounded-md"
               >
                 Go to My Bookings
