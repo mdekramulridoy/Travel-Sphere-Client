@@ -77,7 +77,7 @@ This project utilizes the following technologies:
 - **Firebase**: For backend services and authentication.
 - **TailwindCSS**: For styling the application.
 - **DaisyUI**: For prebuilt UI components with TailwindCSS.
-  more will be added soon..............
+ 
 
 ## Main Features
 
@@ -150,8 +150,6 @@ REACT_APP_FIREBASE_STORAGE_BUCKET=[Your Firebase Storage Bucket]
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=[Your Firebase Messaging Sender ID]
 REACT_APP_FIREBASE_APP_ID=[Your Firebase App ID]
 
-it will be fix soon......................
-```
 
 ### 5. Run the Project
 
