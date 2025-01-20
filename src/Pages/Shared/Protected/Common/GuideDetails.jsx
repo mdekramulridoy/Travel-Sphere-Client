@@ -10,7 +10,7 @@ const GuideDetails = () => {
   useEffect(() => {
     const fetchGuide = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/guides/${id}`);
+        const response = await fetch(`https://travel-sphere-server-nu.vercel.app/guides/${id}`);
         const data = await response.json();
         setGuide(data);
       } catch (error) {
@@ -24,7 +24,7 @@ const GuideDetails = () => {
 useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/packages?guide=${id}`);
+        const response = await fetch(`https://travel-sphere-server-nu.vercel.app/packages?guide=${id}`);
         const data = await response.json();
         setPackages(data.filter(pkg => pkg.guide === id)); 
       } catch (error) {

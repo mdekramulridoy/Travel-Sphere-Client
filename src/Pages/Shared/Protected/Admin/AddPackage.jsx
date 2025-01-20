@@ -15,12 +15,12 @@ const AddPackage = () => {
   });
 
   const { user } = UseAuth();
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://travel-sphere-server-nu.vercel.app";
 
   useEffect(() => {
     const fetchGuides = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/guides`, {
+        const { data } = await axios.get(`https://travel-sphere-server-nu.vercel.app/guides`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access-token")}`,
           },
@@ -82,7 +82,7 @@ const AddPackage = () => {
     }
     try {
       const response = await axios.post(
-        `http://localhost:5000/packages`,
+        `https://travel-sphere-server-nu.vercel.app/packages`,
         packageData,
         {
           headers: {

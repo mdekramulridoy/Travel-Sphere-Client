@@ -14,72 +14,31 @@ const About = () => {
         <p className="text-gray-700 text-lg mb-12 leading-relaxed">
           Welcome to Travel Sphere, your trusted companion for exploring the
           breathtaking landscapes, rich history, and vibrant culture of
-          Bangladesh. Since 2024, we've been committed to providing exceptional
+          Bangladesh. Since 2025, we've been committed to providing exceptional
           travel experiences that create lifelong memories for our clients.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {/* Mission Section */}
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Our Mission
-          </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Our mission is to make travel easy, enjoyable, and accessible for
-            everyone. Whether you're an adventurer seeking thrilling experiences
-            or a family looking for a peaceful getaway, we ensure every trip
-            meets your expectations.
-          </p>
-        </div>
 
-        {/* Vision Section */}
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Our Vision
-          </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            At Travel Sphere, we envision a world where travel connects people,
-            cultures, and ideas. We aim to become the most trusted travel
-            service in Bangladesh, known for quality, innovation, and integrity.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-16 max-w-6xl mx-auto">
-        {/* Why Choose Us Section */}
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Why Choose Us?
+      {/* Developer Info Section */}
+      <div className="mt-16 max-w-6xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-8 text-gray-800">
+          Meet the Developer
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white shadow-md rounded-lg p-6 text-center">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">
-              Expert Guides
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Our experienced guides ensure you have an authentic and enriching
-              travel experience.
-            </p>
-          </div>
-          <div className="bg-white shadow-md rounded-lg p-6 text-center">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">
-              Customized Tours
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Every traveler is unique, and so are our packages. Tailor your
-              trips to match your needs.
-            </p>
-          </div>
-          <div className="bg-white shadow-md rounded-lg p-6 text-center">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">
-              24/7 Support
-            </h3>
-            <p className="text-gray-600 text-sm">
-              We're here for you whenever you need us, ensuring a seamless
-              travel experience.
-            </p>
-          </div>
-        </div>
+        <p className="text-lg mb-6 text-gray-700">
+          This website is developed by Md. Ekramul Hoque, a passionate developer with expertise in creating web applications.
+        </p>
+        <p className="text-lg mb-6 text-gray-700 font-bold">
+          Ekramul has worked on several projects, including:
+        </p>
+        <ul className=" mx-auto max-w-lg text-gray-700 mb-6 text-center list-none">
+          <li className='p-2 border mb-2'><a href="https://typical-hook.surge.sh/" className="text-blue-600 hover:text-white">Typical Hook</a></li>
+          <li className='p-2 border mb-2 hover:text-white'><a href="https://air-ticket-client.web.app/" className="text-blue-600 hover:text-white">Air Ticket Client</a></li>
+          <li className='p-2 border mb-2 hover:text-white'><a href="https://book-library-client-server.web.app/" className="text-blue-600 hover:text-white">Book Library</a></li>
+        </ul>
+        <p className="text-gray-700">
+          Ekramul has created over 12 projects, showcasing his commitment to building useful and engaging applications.
+        </p>
       </div>
     </div>
   );

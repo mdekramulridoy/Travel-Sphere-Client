@@ -8,7 +8,7 @@ const Trips = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/packages");
+        const response = await fetch("https://travel-sphere-server-nu.vercel.app/packages");
         const data = await response.json();
         setTrips(data);
       } catch (error) {

@@ -14,7 +14,7 @@ const MyBookings = () => {
     const fetchBookings = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/bookings/${user.email}`,
+          `https://travel-sphere-server-nu.vercel.app/bookings/${user.email}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access-token")}`, // Assuming you're using JWT token
@@ -45,17 +45,20 @@ const MyBookings = () => {
         return "text-yellow-500"; // Yellow for pending status
       case "confirmed":
         return "text-green-500"; // Green for confirmed status
+      case "in review":
+        return "text-blue-500"; // Blue for in review status
       default:
         return "text-gray-600"; // Default gray color
     }
   };
 
   // Handle payment redirection
-  const handlePayment = async (bookingId) => {
-    // You can optionally check the status or prepare data here
-    // Redirect to the payment route
-    navigate(`/dashboard/payment/${bookingId}`); // Redirect to the payment page with the bookingId
+  const handlePayment = async (bookingId, price) => {
+    navigate(`/dashboard/payment/${bookingId}`, {
+      state: { price },
+    });
   };
+  
 
   // Handle booking cancellation
   const handleCancel = async (bookingId) => {
@@ -71,7 +74,7 @@ const MyBookings = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:5000/bookings/cancel/${bookingId}`,
+            `https://travel-sphere-server-nu.vercel.app/bookings/cancel/${bookingId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -88,7 +91,6 @@ const MyBookings = () => {
       }
     });
   };
-  
 
   return (
     <div className="bg-white py-16 px-6 lg:px-20 min-h-screen">
@@ -116,11 +118,16 @@ const MyBookings = () => {
                 Status: {booking.status}
               </p>
 
+              {/* Display Price */}
+              <p className="text-xl font-semibold text-gray-800 mt-4">
+                Price: ${booking.price} 
+              </p>
+
               {/* Display Pay and Cancel buttons if status is pending */}
               {booking.status === "pending" && (
                 <div className="mt-4 flex justify-between">
                   <button
-                    onClick={() => handlePayment(booking._id)} // Redirect to payment page
+                    onClick={() => handlePayment(booking._id, booking.price)} // Redirect to payment page
                     className="bg-blue-600 text-white text-sm px-6 py-2 rounded hover:bg-blue-700 transition"
                   >
                     Pay

@@ -18,7 +18,7 @@ const PackagesDetails = () => {
   useEffect(() => {
     const fetchPackageDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/packages/${id}`);
+        const response = await fetch(`https://travel-sphere-server-nu.vercel.app/packages/${id}`);
         const data = await response.json();
         setPackageDetails(data);
       } catch (error) {
@@ -32,7 +32,7 @@ const PackagesDetails = () => {
   useEffect(() => {
     const fetchGuides = async () => {
       try {
-        const response = await fetch("http://localhost:5000/guides", {
+        const response = await fetch("https://travel-sphere-server-nu.vercel.app/guides", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access-token")}`,
           },
@@ -75,7 +75,7 @@ const PackagesDetails = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/bookings", {
+      const response = await fetch("https://travel-sphere-server-nu.vercel.app/bookings", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,

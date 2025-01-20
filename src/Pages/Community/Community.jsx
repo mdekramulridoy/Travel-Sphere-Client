@@ -1,83 +1,102 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // For navigation
+import { FacebookShareButton, FacebookIcon } from "react-share";
+import { AuthContext } from "../../Provider/AuthProvider";
+
 
 const Community = () => {
+  const [stories, setStories] = useState([]);
+  const [error, setError] = useState("");
+  const { user, loading } = useContext(AuthContext); // Get user from AuthContext
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user has access-token and include it in the request header
+    const token = localStorage.getItem("access-token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+    // Fetch 4 random stories from the database
+    fetch("https://travel-sphere-server-nu.vercel.app/stories/random/4", { headers })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching stories");
+        }
+        return response.json();
+      })
+      .then((data) => setStories(data))
+      .catch((error) => {
+        console.error(error);
+        setError("Failed to load stories.");
+      });
+  }, []);
+
+  const handleShare = (story) => {
+    if (!user) {
+      navigate("/login"); // Redirect to login page if not logged in
+    }
+  };
+
   return (
-    <div className="bg-[#8BDEFF] min-h-screen py-16 px-6 lg:px-20">
-      <Helmet>
-        <title>Community | Travel Sphere</title>
-      </Helmet>
-      <div className="max-w-5xl mx-auto text-center">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-gray-800">
-          Join Our Community
-        </h1>
-        <p className="text-gray-700 text-lg mb-12 leading-relaxed">
-          At Travel Sphere, we believe in the power of community. Whether you're 
-          a travel enthusiast, an adventurer, or simply someone who loves to connect 
-          with like-minded individuals, our community is here to inspire, share, and 
-          grow together.
-        </p>
-      </div>
+    <div className="md:mx-20 mx-10 lg:mx-0 mb-10 pt-10">
+      <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">
+        All Stories Community
+      </h1>
 
-      {/* Community Benefits Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Exclusive Events</h2>
-          <p className="text-gray-600 text-sm">
-            Participate in meetups, workshops, and exclusive travel events with fellow travelers.
-          </p>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Local Insights</h2>
-          <p className="text-gray-600 text-sm">
-            Gain insider tips and recommendations from local experts and community members.
-          </p>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Collaborative Planning</h2>
-          <p className="text-gray-600 text-sm">
-            Share your travel plans and collaborate with others to create unforgettable experiences.
-          </p>
-        </div>
-      </div>
+      {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
-      {/* Call to Action Section */}
-      <div className="mt-16 text-center max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-gray-800">How to Join?</h2>
-        <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-          Becoming a part of our community is simple and free. Sign up to access 
-          member-only benefits, connect with others, and stay updated on the latest events and tours.
-        </p>
-        <button className="bg-gray-800 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-700 transition-all">
-          Join Now
-        </button>
-      </div>
+      {/* Display stories */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {stories.length > 0 ? (
+          stories.map((story) => (
+            <div
+              key={story._id}
+              className="story-card bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105"
+            >
+              <div className="p-4">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {story.title}
+                </h3>
+                <p className="text-gray-600 mb-2">{story.text}</p>
 
-      {/* Testimonials Section */}
-      <div className="mt-16 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">What Our Members Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <p className="text-gray-600 italic">
-              "Joining the Travel Sphere community has been a game-changer for my travel experiences. 
-              The connections and tips I gained are invaluable."
-            </p>
-            <h3 className="text-gray-800 font-semibold mt-4">- Aisha Rahman</h3>
-          </div>
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <p className="text-gray-600 italic">
-              "I love the events organized by the community. They're fun, insightful, and perfect for 
-              networking with other travel lovers."
-            </p>
-            <h3 className="text-gray-800 font-semibold mt-4">- Imran Hossain</h3>
-          </div>
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <p className="text-gray-600 italic">
-              "Travel Sphere is more than just a platform—it's a family. I've made lifelong friends here."
-            </p>
-            <h3 className="text-gray-800 font-semibold mt-4">- Farah Khan</h3>
-          </div>
-        </div>
+                {/* Display images */}
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  {story.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Story Image ${index + 1}`}
+                      className="w-full h-[100px] rounded-lg"
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between mt-4">
+                  <FacebookShareButton
+                    url={`https://travel-sphere-server-nu.vercel.app/story/${story._id}`}
+                    quote={story.title}
+                    onClick={() => handleShare(story)}
+                  >
+                    <FacebookIcon size={32} round />
+                  </FacebookShareButton>
+                  <span
+                    className="text-blue-600 cursor-pointer"
+                    onClick={() => navigate("/dashboard/manage-story")}
+                  >
+                    All Stories
+                  </span>
+                  <span
+                    className="text-blue-600 cursor-pointer ml-4"
+                    onClick={() => navigate("/dashboard/add-stories")}
+                  >
+                    Add Stories
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-600">No stories available or loading...</p>
+        )}
       </div>
     </div>
   );

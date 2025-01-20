@@ -164,7 +164,7 @@ npm run dev
 Once the development server is running, open your browser and go to:
 
 ```
-http://localhost:5000
+https://travel-sphere-server-nu.vercel.app
 ```
 
 ## Contribution

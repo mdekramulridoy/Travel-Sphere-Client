@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UseAuth from "./UseAuth";
 
 const axiosSecure = axios.create({
-    baseURL: process.env.VITE_API_URL || "http://localhost:5000",
+    baseURL: process.env.VITE_API_URL || "https://travel-sphere-server-nu.vercel.app",
   });
   
 

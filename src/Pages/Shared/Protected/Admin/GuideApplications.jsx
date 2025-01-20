@@ -5,7 +5,7 @@ const GuideApplications = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user, role } = UseAuth();
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://travel-sphere-server-nu.vercel.app";
 
   useEffect(() => {
     const fetchApplications = async () => {

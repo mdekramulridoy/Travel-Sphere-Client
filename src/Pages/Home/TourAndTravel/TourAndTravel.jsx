@@ -9,7 +9,7 @@ const TourAndTravel = () => {
 
   useEffect(() => {
     // Fetching random 3 packages
-    fetch(`http://localhost:5000/packages/random/3`)
+    fetch(`https://travel-sphere-server-nu.vercel.app/packages/random/3`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error fetching packages");
@@ -23,7 +23,7 @@ const TourAndTravel = () => {
       });
 
     // Fetching random 6 guides
-    fetch(`http://localhost:5000/guides/random/6`)
+    fetch(`https://travel-sphere-server-nu.vercel.app/guides/random/6`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error fetching guides");

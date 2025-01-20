@@ -15,7 +15,7 @@ const StorySectionHome = () => {
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     // Fetch 4 random stories from the database
-    fetch("http://localhost:5000/stories/random/4", { headers })
+    fetch("https://travel-sphere-server-nu.vercel.app/stories/random/4", { headers })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error fetching stories");
@@ -71,7 +71,7 @@ const StorySectionHome = () => {
 
                 <div className="flex items-center justify-between mt-4">
                   <FacebookShareButton
-                    url={`http://localhost:5000/story/${story._id}`}
+                    url={`https://travel-sphere-server-nu.vercel.app/story/${story._id}`}
                     quote={story.title}
                     onClick={() => handleShare(story)}
                   >

@@ -11,7 +11,7 @@ const AdminStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/admin/stats`, {
+        const response = await fetch(`https://travel-sphere-server-nu.vercel.app/admin/stats`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access-token")}`,

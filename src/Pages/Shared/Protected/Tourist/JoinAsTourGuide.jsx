@@ -18,7 +18,7 @@ const JoinAsTourGuide = () => {
       if (user?.email) {
         try {
           const response = await fetch(
-            `http://localhost:5000/guideApplications/status/${user.email}`,
+            `https://travel-sphere-server-nu.vercel.app/guideApplications/status/${user.email}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -66,7 +66,7 @@ const JoinAsTourGuide = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/guideApplications", {
+      const response = await fetch("https://travel-sphere-server-nu.vercel.app/guideApplications", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

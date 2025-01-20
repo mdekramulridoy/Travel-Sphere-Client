@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState(null);
   const [loading, setLoading] = useState(true);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://travel-sphere-server-nu.vercel.app";
 
   const roleOptions = [
     { value: "", label: "All" },
