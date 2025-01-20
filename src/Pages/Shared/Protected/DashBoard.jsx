@@ -162,7 +162,7 @@ const DashBoard = () => {
         </div>
         <div className="flex-1 p-5">
           <h1 className="text-3xl font-bold text-center">
-            Welcome t o the Dashboard
+            Welcome to the Dashboard
           </h1>
           <p className="text-center">User: {user?.email}</p>
           <p className="text-center">Role: {role}</p>

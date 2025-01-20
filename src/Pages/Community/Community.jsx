@@ -26,7 +26,7 @@ const Community = () => {
       .then((data) => setStories(data))
       .catch((error) => {
         console.error(error);
-        setError("Failed to load stories.");
+        setError("You Need to Login or failed data.");
       });
   }, []);
 
