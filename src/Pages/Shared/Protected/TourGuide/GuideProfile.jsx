@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { imageUpload, saveUser } from "../../../../api/utils";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,7 +50,7 @@ const GuideProfile = () => {
   const [name, setName] = useState(user?.displayName || "");
   const [photo, setPhoto] = useState(user?.photoURL || "");
   const [newPhoto, setNewPhoto] = useState(null);
-  const navigate = useNavigate();
+
 
   const handleEditClick = () => setIsEditing(true);
 

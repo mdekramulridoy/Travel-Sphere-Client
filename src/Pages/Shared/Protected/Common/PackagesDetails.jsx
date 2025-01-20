@@ -49,6 +49,18 @@ const PackagesDetails = () => {
   // Handle booking submission
   const handleBooking = async (e) => {
     e.preventDefault();
+
+    // Find selected guide's email
+    const selectedGuideEmail = guides.find(
+      (guide) => guide.name === selectedGuide
+    )?.email;
+
+    // If guide's email not found, alert the user
+    if (!selectedGuideEmail) {
+      alert("Please select a valid guide.");
+      return;
+    }
+
     const bookingData = {
       packageId: id,
       packageName: packageDetails.name,
@@ -58,6 +70,7 @@ const PackagesDetails = () => {
       price: packageDetails.price,
       tourDate,
       guideName: selectedGuide,
+      guideEmail: selectedGuideEmail, // Save guide's email here
       status: "pending", // Set status as pending
     };
 
@@ -65,6 +78,7 @@ const PackagesDetails = () => {
       const response = await fetch("http://localhost:5000/bookings", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(bookingData),
@@ -220,7 +234,10 @@ const PackagesDetails = () => {
         <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-md w-1/3 flex flex-col items-center text-center">
             <h3 className="text-xl font-semibold mb-4">Request pending</h3>
-            <p>Your booking is now pending. Once the guide confirms, you will receive further details.</p>
+            <p>
+              Your booking is now pending. Once the guide confirms, you will
+              receive further details.
+            </p>
             <div className="mt-4 flex flex-col items-center text-center gap-3">
               <button
                 onClick={() => navigate("/my-bookings")}
