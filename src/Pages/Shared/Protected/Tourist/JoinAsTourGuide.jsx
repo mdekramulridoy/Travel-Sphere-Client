@@ -105,6 +105,22 @@ const JoinAsTourGuide = () => {
         </div>
       </div>
     );
+  };
+
+  if (applicationStatus === "rejected") {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          <h1 className="text-2xl font-bold text-center mb-6 text-[#93C5FD]">
+            Application Status
+          </h1>
+          <p className="text-center text-gray-700">
+            You are rejected. <br />
+            Status: <span className="font-semibold text-[#93C5FD]">Rejected</span>
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
