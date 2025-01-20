@@ -11,12 +11,16 @@ import Trips from "../Pages/Community/Trips/Trips";
 import JoinAsTourGuide from "../Pages/Shared/Protected/Tourist/JoinAsTourGuide";
 import GuideApplications from "../Pages/Shared/Protected/Admin/GuideApplications";
 import ManageUsers from "../Pages/Shared/Protected/Admin/ManageUsers";
-import AddStory from "../Pages/Shared/Protected/Admin/AddStory";
 import AddPackage from "../Pages/Shared/Protected/Admin/AddPackage";
 import TouristProfile from "../Pages/Shared/Protected/Tourist/TouristProfile";
 import PackagesDetails from "../Pages/Shared/Protected/Common/PackagesDetails";
 import GuideDetails from "../Pages/Shared/Protected/Common/GuideDetails";
 import MyBookings from "../Pages/Shared/Protected/Tourist/MyBookings";
+import AddStory from "../Pages/Shared/Protected/Common/AddStory";
+import ManageStory from "../Pages/Shared/Protected/Common/ManageStory";
+import EditStory from "../Pages/Shared/Protected/Common/EditStory";
+import AssignedTour from "../Pages/Shared/Protected/TourGuide/AssignedTour";
+import GuideProfile from "../Pages/Shared/Protected/TourGuide/GuideProfile";
 
 export const router = createBrowserRouter([
   {
@@ -79,9 +83,10 @@ export const router = createBrowserRouter([
         element: <TouristProfile></TouristProfile>,
       },
       {
-        path: "add-stories",
-        element:<AddStory></AddStory>,
+        path: "guide-profile",
+        element: <GuideProfile></GuideProfile>,
       },
+
       {
         path: "tourist-booking",
         element: <MyBookings></MyBookings>,
@@ -95,12 +100,24 @@ export const router = createBrowserRouter([
         element: <AddStory></AddStory>,
       },
       {
+        path: "manage-story",
+        element: <ManageStory></ManageStory>,
+      },
+      {
+        path: "edit-story/:id",
+        element: <EditStory></EditStory>,
+      },      
+      {
         path: "add-package",
         element: <AddPackage></AddPackage>,
       },
       {
         path: "join-as-tour-guide",
         element: <JoinAsTourGuide></JoinAsTourGuide>,
+      },
+      {
+        path: "assigned-tours",
+        element: <AssignedTour></AssignedTour>,
       },
       {
         path: "guideApplications",

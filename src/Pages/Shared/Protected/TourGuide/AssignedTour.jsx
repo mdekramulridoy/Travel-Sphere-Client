@@ -1,13 +1,13 @@
 import React from 'react';
 
-const AddStory = () => {
+const AssignedTour = () => {
     return (
         <div>
             <h1>
-                This is Add story.
+                This is Guide that assigned tourist.
             </h1>
         </div>
     );
 };
 
-export default AddStory;
+export default AssignedTour;

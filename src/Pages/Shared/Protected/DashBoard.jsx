@@ -65,15 +65,20 @@ const DashBoard = () => {
         label: "Home",
       },
       {
-        to: "/dashboard/profile",
+        to: "/dashboard/guide-profile",
         icon: <CgProfile />,
         label: "Guide Profile",
       },
-      { to: "/dashboard/assigned-tours", icon: <MdTour />, label: "My Tours" },
+      { to: "/dashboard/assigned-tours", icon: <MdTour />, label: "My Assigned Tours" },
       {
         to: "/dashboard/add-stories",
         icon: <SiStorybook />,
         label: "Add Stories",
+      },
+      {
+        to: "/dashboard/manage-story",
+        icon: <MdTour />,
+        label: "Manage Stories",
       },
       {
         to: "/login",
@@ -105,7 +110,7 @@ const DashBoard = () => {
         label: "Add Stories",
       },
       {
-        to: "/dashboard/manage-stories",
+        to: "/dashboard/manage-story",
         icon: <MdTour />,
         label: "Manage Stories",
       },
