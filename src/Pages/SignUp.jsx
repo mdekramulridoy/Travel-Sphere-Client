@@ -182,7 +182,7 @@ const Signup = () => {
                   {...register("image", { required: "Photo is required" })}
                   type="file"
                   accept="image/*"
-                  className="input input-bordered text-black"
+                  className="input input-bordered p-2 text-black"
                 />
                 {errors.image && (
                   <span className="text-red-600">{errors.image.message}</span>

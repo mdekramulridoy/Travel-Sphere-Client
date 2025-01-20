@@ -51,8 +51,8 @@ const AuthProvider = ({ children }) => {
       displayName: name,
       photoURL: photo,
     });
+    
   };
-
   const setUserRole = async (email) => {
     const token = localStorage.getItem("access-token");
     try {

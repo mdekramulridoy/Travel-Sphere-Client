@@ -8,7 +8,7 @@ const JoinAsTourGuide = () => {
   const [whyGuide, setWhyGuide] = useState("");
   const [cvLink, setCvLink] = useState("");
   const [loading, setLoading] = useState(false);
-  const [applicationStatus, setApplicationStatus] = useState(null); // নতুন state
+  const [applicationStatus, setApplicationStatus] = useState(null); 
 
   const navigate = useNavigate();
   const { user } = UseAuth();

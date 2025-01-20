@@ -11,6 +11,9 @@ import Trips from "../Pages/Community/Trips/Trips";
 import JoinAsTourGuide from "../Pages/Shared/Protected/Tourist/JoinAsTourGuide";
 import GuideApplications from "../Pages/Shared/Protected/Admin/GuideApplications";
 import ManageUsers from "../Pages/Shared/Protected/Admin/ManageUsers";
+import AddStory from "../Pages/Shared/Protected/Admin/AddStory";
+import AddPackage from "../Pages/Shared/Protected/Admin/AddPackage";
+import TouristProfile from "../Pages/Shared/Protected/Tourist/TouristProfile";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +56,16 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+         path: "tourist-profile", element: <TouristProfile></TouristProfile>
+      },
+      {
          path: "manage-users", element: <ManageUsers></ManageUsers>
+      },
+      {
+         path: "add-stories", element: <AddStory></AddStory>
+      },
+      {
+         path: "add-package", element: <AddPackage></AddPackage>
       },
       {
          path: "join-as-tour-guide", element: <JoinAsTourGuide></JoinAsTourGuide>

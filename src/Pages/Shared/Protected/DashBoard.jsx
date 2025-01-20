@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
 import { FaBars, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { CgHome, CgProfile } from "react-icons/cg";
-import { MdManageHistory, MdTour } from "react-icons/md";
+import { CgHome, CgLogOut, CgProfile } from "react-icons/cg";
+import { MdTour } from "react-icons/md";
 import { SiStorybook } from "react-icons/si";
 import Footer from "../Footer";
 
 const DashBoard = () => {
-  const { user, role } = UseAuth();
+  const { user, role, logOut } = UseAuth(); // Make sure logOut is available
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        // Redirect or show a success message
+      })
+      .catch((error) => console.log(error));
+  };
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -24,14 +32,9 @@ const DashBoard = () => {
         label: "Home",
       },
       {
-        to: "/dashboard/profile",
+        to: "/dashboard/admin-profile",
         icon: <CgProfile />,
-        label: "Manage Profile",
-      },
-      {
-        to: "/dashboard/admin-assigned-tours",
-        icon: <MdTour />,
-        label: "My Assigned Tours",
+        label: "Admin Profile",
       },
       {
         to: "/dashboard/guideApplications",
@@ -39,16 +42,16 @@ const DashBoard = () => {
         label: "Guide Applications",
       },
       {
-        to: "/dashboard/add-stories",
+        to: "/dashboard/add-package",
         icon: <SiStorybook />,
-        label: "Add Stories",
+        label: "Add Package",
       },
       {
-        to: "/dashboard/manage-stories",
-        icon: <MdManageHistory />,
-        label: "Manage Stories",
+        to: "/dashboard/manage-users",
+        icon: <FaUsers />,
+        label: "Manage Users",
       },
-      { to: "/dashboard/manage-users", icon: <FaUsers />, label: "Manage Users" },
+      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
     ],
     guide: [
       {
@@ -59,7 +62,7 @@ const DashBoard = () => {
       {
         to: "/dashboard/profile",
         icon: <CgProfile />,
-        label: "Manage Profile",
+        label: "Guide Profile",
       },
       { to: "/dashboard/assigned-tours", icon: <MdTour />, label: "My Tours" },
       {
@@ -67,6 +70,7 @@ const DashBoard = () => {
         icon: <SiStorybook />,
         label: "Add Stories",
       },
+      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
     ],
     tourist: [
       {
@@ -75,9 +79,9 @@ const DashBoard = () => {
         label: "Home",
       },
       {
-        to: "/dashboard/profile",
+        to: "/dashboard/tourist-profile",
         icon: <CgProfile />,
-        label: "Manage Profile",
+        label: "Tourist Profile",
       },
       {
         to: "/dashboard/tourist-booking",
@@ -89,18 +93,17 @@ const DashBoard = () => {
         icon: <MdTour />,
         label: "Manage Stories",
       },
-      { to: "/dashboard/add-stories", icon: <MdTour />, label: "Add Stories" },
       {
         to: "/dashboard/join-as-tour-guide",
         icon: <MdTour />,
-        label: "Join as tour guide",
+        label: "join As Guide",
       },
+      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
     ],
   };
 
   // Select menu items based on role
   const menuItems = menuConfig[role] || [];
-  console.log(role);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -121,6 +124,7 @@ const DashBoard = () => {
               <li key={index}>
                 <NavLink
                   to={item.to}
+                  onClick={item.onClick} // Adding onClick to the logout button
                   className="flex items-center space-x-4 p-2"
                 >
                   {item.icon}
@@ -131,7 +135,7 @@ const DashBoard = () => {
           </ul>
         </div>
         <div className="flex-1 p-5">
-          <h1 className="text-3xl font-bold">Welcome to the Dashboard</h1>
+          <h1 className="text-3xl font-bold">Welcome t o the Dashboard</h1>
           <p>User: {user?.email}</p>
           <p>Role: {role}</p>
           <Outlet />
