@@ -21,6 +21,7 @@ import ManageStory from "../Pages/Shared/Protected/Common/ManageStory";
 import EditStory from "../Pages/Shared/Protected/Common/EditStory";
 import AssignedTour from "../Pages/Shared/Protected/TourGuide/AssignedTour";
 import GuideProfile from "../Pages/Shared/Protected/TourGuide/GuideProfile";
+import AdminProfile from "../Pages/Shared/Protected/Admin/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: "guide-profile",
         element: <GuideProfile></GuideProfile>,
+      },
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
       },
 
       {

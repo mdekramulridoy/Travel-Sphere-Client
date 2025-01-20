@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import registerAnimation from "../assets/lottie/signup.json";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
@@ -198,6 +198,16 @@ const Signup = () => {
               <div className="divider mx-10"></div>
               <SocialLogin></SocialLogin>
             </form>
+            <p className="mb-4 text-center text-black">
+              Already signup? please{" "}
+              <Link
+                className="font-bold text-red-600 hover:underline"
+                to="/login"
+              >
+                login
+              </Link>
+              
+            </p>
           </div>
         </div>
       </div>
