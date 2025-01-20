@@ -79,6 +79,10 @@ export const router = createBrowserRouter([
         element: <TouristProfile></TouristProfile>,
       },
       {
+        path: "add-stories",
+        element:<AddStory></AddStory>,
+      },
+      {
         path: "tourist-booking",
         element: <MyBookings></MyBookings>,
       },

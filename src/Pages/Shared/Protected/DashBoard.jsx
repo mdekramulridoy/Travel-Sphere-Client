@@ -51,7 +51,12 @@ const DashBoard = () => {
         icon: <FaUsers />,
         label: "Manage Users",
       },
-      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
+      {
+        to: "/login",
+        icon: <CgLogOut />,
+        label: "Logout",
+        onClick: handleLogOut,
+      },
     ],
     guide: [
       {
@@ -70,7 +75,12 @@ const DashBoard = () => {
         icon: <SiStorybook />,
         label: "Add Stories",
       },
-      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
+      {
+        to: "/login",
+        icon: <CgLogOut />,
+        label: "Logout",
+        onClick: handleLogOut,
+      },
     ],
     tourist: [
       {
@@ -88,6 +98,12 @@ const DashBoard = () => {
         icon: <MdTour />,
         label: "My Bookings",
       },
+
+      {
+        to: "/dashboard/add-stories",
+        icon: <SiStorybook />,
+        label: "Add Stories",
+      },
       {
         to: "/dashboard/manage-stories",
         icon: <MdTour />,
@@ -98,7 +114,12 @@ const DashBoard = () => {
         icon: <MdTour />,
         label: "join As Guide",
       },
-      { to: "/login", icon: <CgLogOut />, label: "Logout", onClick: handleLogOut },
+      {
+        to: "/login",
+        icon: <CgLogOut />,
+        label: "Logout",
+        onClick: handleLogOut,
+      },
     ],
   };
 
@@ -135,7 +156,9 @@ const DashBoard = () => {
           </ul>
         </div>
         <div className="flex-1 p-5">
-          <h1 className="text-3xl font-bold text-center">Welcome t o the Dashboard</h1>
+          <h1 className="text-3xl font-bold text-center">
+            Welcome t o the Dashboard
+          </h1>
           <p className="text-center">User: {user?.email}</p>
           <p className="text-center">Role: {role}</p>
           <Outlet />
