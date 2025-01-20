@@ -25,6 +25,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.1.1",
     "react-select": "^5.9.0",
+    "react-share": "^5.1.2",
     "react-tabs": "^6.1.0",
     "react-toastify": "^11.0.3",
     "sort-by": "^1.2.0",

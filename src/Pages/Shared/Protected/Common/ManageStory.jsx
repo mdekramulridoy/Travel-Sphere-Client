@@ -60,6 +60,20 @@ const ManageStory = () => {
             <div className="p-4">
               <h2 className="text-lg font-semibold text-gray-900">{story.title}</h2>
               <p className="text-gray-600 mt-2">{story.description}</p>
+
+              {/* Show images if available */}
+              {story.images && story.images.length > 0 && (
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {story.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Story Image ${index + 1}`}
+                      className="w-full h-[100px] rounded-lg"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex justify-between p-4 bg-gray-50">
               <Link

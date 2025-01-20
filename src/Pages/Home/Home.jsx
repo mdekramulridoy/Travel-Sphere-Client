@@ -4,6 +4,7 @@ import OverView from "./OverView";
 import StorySectionHome from "./TourAndTravel/StorySectionHome";
 import ExtraTwoSection from "./ExtraTwoSection";
 import ExtraOneSection from "./ExtraOneSection";
+import TourAndTravel from "./TourAndTravel/TourAndTravel";
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <OverView></OverView>
-      {/* <TourAndTravel></TourAndTravel> */}
+      <TourAndTravel></TourAndTravel>
       <StorySectionHome></StorySectionHome>
       <ExtraOneSection></ExtraOneSection>
       <ExtraTwoSection></ExtraTwoSection>

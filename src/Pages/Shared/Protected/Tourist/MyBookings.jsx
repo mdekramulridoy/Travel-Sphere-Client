@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
+  const navigate = useNavigate(); // React Router navigate hook
 
   // Fetch bookings of the current user
   useEffect(() => {
@@ -46,6 +50,46 @@ const MyBookings = () => {
     }
   };
 
+  // Handle payment redirection
+  const handlePayment = async (bookingId) => {
+    // You can optionally check the status or prepare data here
+    // Redirect to the payment route
+    navigate(`/dashboard/payment/${bookingId}`); // Redirect to the payment page with the bookingId
+  };
+
+  // Handle booking cancellation
+  const handleCancel = async (bookingId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `http://localhost:5000/bookings/cancel/${bookingId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+              },
+            }
+          );
+          // Remove the booking from the UI
+          setBookings((prev) => prev.filter((booking) => booking._id !== bookingId));
+          Swal.fire("Cancelled!", "The booking has been cancelled.", "success");
+        } catch (error) {
+          console.error("Error cancelling booking:", error);
+          Swal.fire("Error!", "Something went wrong while cancelling the booking.", "error");
+        }
+      }
+    });
+  };
+  
+
   return (
     <div className="bg-white py-16 px-6 lg:px-20 min-h-screen">
       <h1 className="text-4xl font-semibold text-gray-800 mb-6">
@@ -71,6 +115,24 @@ const MyBookings = () => {
               <p className={`font-semibold ${getStatusColor(booking.status)}`}>
                 Status: {booking.status}
               </p>
+
+              {/* Display Pay and Cancel buttons if status is pending */}
+              {booking.status === "pending" && (
+                <div className="mt-4 flex justify-between">
+                  <button
+                    onClick={() => handlePayment(booking._id)} // Redirect to payment page
+                    className="bg-blue-600 text-white text-sm px-6 py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Pay
+                  </button>
+                  <button
+                    onClick={() => handleCancel(booking._id)}
+                    className="bg-red-600 text-white text-sm px-6 py-2 rounded hover:bg-red-700 transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>

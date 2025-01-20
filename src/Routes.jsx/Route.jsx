@@ -22,6 +22,7 @@ import EditStory from "../Pages/Shared/Protected/Common/EditStory";
 import AssignedTour from "../Pages/Shared/Protected/TourGuide/AssignedTour";
 import GuideProfile from "../Pages/Shared/Protected/TourGuide/GuideProfile";
 import AdminProfile from "../Pages/Shared/Protected/Admin/AdminProfile";
+import Payment from "../Pages/Shared/Protected/Common/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "payment/:id",
+        element: <Payment></Payment>,
+      },
       {
         path: "tourist-profile",
         element: <TouristProfile></TouristProfile>,
