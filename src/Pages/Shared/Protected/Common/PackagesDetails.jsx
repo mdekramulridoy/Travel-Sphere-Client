@@ -34,7 +34,7 @@ const PackagesDetails = () => {
       try {
         const response = await fetch("http://localhost:5000/guides", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
           },
         });
         const data = await response.json();

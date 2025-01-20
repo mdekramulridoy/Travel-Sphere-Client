@@ -66,7 +66,7 @@ const GuideApplications = () => {
       const response = await fetch(
         `${baseUrl}/guideApplications/${applicationId}`,
         {
-          method: "PATCH",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access-token")}`,

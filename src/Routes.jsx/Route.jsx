@@ -16,6 +16,7 @@ import AddPackage from "../Pages/Shared/Protected/Admin/AddPackage";
 import TouristProfile from "../Pages/Shared/Protected/Tourist/TouristProfile";
 import PackagesDetails from "../Pages/Shared/Protected/Common/PackagesDetails";
 import GuideDetails from "../Pages/Shared/Protected/Common/GuideDetails";
+import MyBookings from "../Pages/Shared/Protected/Tourist/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "tourist-profile",
         element: <TouristProfile></TouristProfile>,
+      },
+      {
+        path: "tourist-booking",
+        element: <MyBookings></MyBookings>,
       },
       {
         path: "manage-users",

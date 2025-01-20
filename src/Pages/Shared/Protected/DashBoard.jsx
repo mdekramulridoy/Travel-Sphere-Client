@@ -135,9 +135,9 @@ const DashBoard = () => {
           </ul>
         </div>
         <div className="flex-1 p-5">
-          <h1 className="text-3xl font-bold">Welcome t o the Dashboard</h1>
-          <p>User: {user?.email}</p>
-          <p>Role: {role}</p>
+          <h1 className="text-3xl font-bold text-center">Welcome t o the Dashboard</h1>
+          <p className="text-center">User: {user?.email}</p>
+          <p className="text-center">Role: {role}</p>
           <Outlet />
         </div>
       </div>
