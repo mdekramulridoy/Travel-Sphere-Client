@@ -14,6 +14,8 @@ import ManageUsers from "../Pages/Shared/Protected/Admin/ManageUsers";
 import AddStory from "../Pages/Shared/Protected/Admin/AddStory";
 import AddPackage from "../Pages/Shared/Protected/Admin/AddPackage";
 import TouristProfile from "../Pages/Shared/Protected/Tourist/TouristProfile";
+import PackagesDetails from "../Pages/Shared/Protected/Common/PackagesDetails";
+import GuideDetails from "../Pages/Shared/Protected/Common/GuideDetails";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,22 @@ export const router = createBrowserRouter([
         element: <Trips></Trips>,
       },
       {
+        path: "package-details/:id",
+        element: (
+          <PrivateRoute>
+            <PackagesDetails></PackagesDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "guides/:id",
+        element: (
+          <PrivateRoute>
+            <GuideDetails></GuideDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "login",
         element: <Login></Login>,
       },
@@ -56,22 +74,28 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-         path: "tourist-profile", element: <TouristProfile></TouristProfile>
+        path: "tourist-profile",
+        element: <TouristProfile></TouristProfile>,
       },
       {
-         path: "manage-users", element: <ManageUsers></ManageUsers>
+        path: "manage-users",
+        element: <ManageUsers></ManageUsers>,
       },
       {
-         path: "add-stories", element: <AddStory></AddStory>
+        path: "add-stories",
+        element: <AddStory></AddStory>,
       },
       {
-         path: "add-package", element: <AddPackage></AddPackage>
+        path: "add-package",
+        element: <AddPackage></AddPackage>,
       },
       {
-         path: "join-as-tour-guide", element: <JoinAsTourGuide></JoinAsTourGuide>
+        path: "join-as-tour-guide",
+        element: <JoinAsTourGuide></JoinAsTourGuide>,
       },
       {
-         path: "guideApplications", element: <GuideApplications></GuideApplications>
+        path: "guideApplications",
+        element: <GuideApplications></GuideApplications>,
       },
     ],
   },
