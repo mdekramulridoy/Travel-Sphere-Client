@@ -94,7 +94,7 @@ const StorySectionHome = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-600">No stories available</p>
+          <p className="text-center text-gray-600">No stories available or need to login</p>
         )}
       </div>
     </div>

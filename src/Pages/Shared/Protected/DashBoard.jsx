@@ -1,36 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, NavLink, Outlet } from "react-router-dom";
 import UseAuth from "../../../Hooks/UseAuth";
 import { FaBars, FaUsers } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
 import { CgHome, CgLogOut, CgProfile } from "react-icons/cg";
 import { MdTour } from "react-icons/md";
 import { SiStorybook } from "react-icons/si";
 import Footer from "../Footer";
 
 const DashBoard = () => {
-  const { user, role, logOut } = UseAuth(); // Make sure logOut is available
+  const { user, role, logOut } = UseAuth();
   const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
 
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        // Redirect or show a success message
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  // Role-Based Menu Configuration
+  // Define role-based menu configuration
   const menuConfig = {
     admin: [
-      {
-        to: "/",
-        icon: <CgHome />,
-        label: "Home",
-      },
       {
         to: "/dashboard/admin-profile",
         icon: <CgProfile />,
@@ -52,24 +36,22 @@ const DashBoard = () => {
         label: "Manage Users",
       },
       {
-        to: "/login",
-        icon: <CgLogOut />,
-        label: "Logout",
-        onClick: handleLogOut,
+        to: "/",
+        icon: <CgHome />,
+        label: "Back to Home",
       },
     ],
     guide: [
-      {
-        to: "/",
-        icon: <CgHome />,
-        label: "Home",
-      },
       {
         to: "/dashboard/guide-profile",
         icon: <CgProfile />,
         label: "Guide Profile",
       },
-      { to: "/dashboard/assigned-tours", icon: <MdTour />, label: "My Assigned Tours" },
+      {
+        to: "/dashboard/assigned-tours",
+        icon: <MdTour />,
+        label: "My Assigned Tours",
+      },
       {
         to: "/dashboard/add-stories",
         icon: <SiStorybook />,
@@ -81,18 +63,12 @@ const DashBoard = () => {
         label: "Manage Stories",
       },
       {
-        to: "/login",
-        icon: <CgLogOut />,
-        label: "Logout",
-        onClick: handleLogOut,
+        to: "/",
+        icon: <CgHome />,
+        label: "Back to Home",
       },
     ],
     tourist: [
-      {
-        to: "/",
-        icon: <CgHome />,
-        label: "Home",
-      },
       {
         to: "/dashboard/tourist-profile",
         icon: <CgProfile />,
@@ -103,7 +79,6 @@ const DashBoard = () => {
         icon: <MdTour />,
         label: "My Bookings",
       },
-
       {
         to: "/dashboard/add-stories",
         icon: <SiStorybook />,
@@ -117,30 +92,58 @@ const DashBoard = () => {
       {
         to: "/dashboard/join-as-tour-guide",
         icon: <MdTour />,
-        label: "join As Guide",
+        label: "Join As Guide",
       },
       {
-        to: "/login",
-        icon: <CgLogOut />,
-        label: "Logout",
-        onClick: handleLogOut,
+        to: "/",
+        icon: <CgHome />,
+        label: "Back to Home",
       },
     ],
   };
 
-  // Select menu items based on role
+  // Handle Logout
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // Append Logout option for all roles
   const menuItems = menuConfig[role] || [];
+  menuItems.push({
+    to: "/login",
+    icon: <CgLogOut />,
+    label: "Logout",
+    onClick: handleLogOut,
+  });
+
+  // Redirect to the default profile page based on role
+  useEffect(() => {
+    if (role) {
+      const defaultRoute = {
+        admin: "/dashboard/admin-profile",
+        guide: "/dashboard/guide-profile",
+        tourist: "/dashboard/tourist-profile",
+      }[role];
+
+      navigate(defaultRoute, { replace: true });
+    }
+  }, [role, navigate]);
 
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-1">
+        {/* Sidebar */}
         <div
           className={`transition-all duration-300 ${
             isExpanded ? "w-64" : "w-16"
           } bg-blue-300 min-h-screen flex flex-col`}
         >
           <button
-            onClick={toggleSidebar}
+            onClick={() => setIsExpanded(!isExpanded)}
             className="btn bg-blue-500 text-white text-lg mb-4 mt-4 self-center"
           >
             <FaBars />
@@ -150,7 +153,7 @@ const DashBoard = () => {
               <li key={index}>
                 <NavLink
                   to={item.to}
-                  onClick={item.onClick} // Adding onClick to the logout button
+                  onClick={item.onClick}
                   className="flex items-center space-x-4 p-2"
                 >
                   {item.icon}
@@ -160,15 +163,13 @@ const DashBoard = () => {
             ))}
           </ul>
         </div>
-        <div className="flex-1 p-5">
-          <h1 className="text-3xl font-bold text-center">
-            Welcome to the Dashboard
-          </h1>
-          <p className="text-center">User: {user?.email}</p>
-          <p className="text-center">Role: {role}</p>
+
+        {/* Main Content */}
+        <div className="flex-1">
           <Outlet />
         </div>
       </div>
+
       <Footer />
     </div>
   );

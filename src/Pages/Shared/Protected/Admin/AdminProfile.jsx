@@ -16,26 +16,30 @@ const Modal = ({
 }) => {
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96">
+      <div className="bg-white p-6 rounded-lg w-96 max-w-lg">
         <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mb-4 p-2 border border-gray-300 rounded-md w-full"
+          className="mb-4 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Your name"
         />
-        <input type="file" onChange={handlePhotoChange} className="mb-4" />
+        <input
+          type="file"
+          onChange={handlePhotoChange}
+          className="mb-4 w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-500 file:text-white file:hover:bg-blue-600"
+        />
         <div className="flex justify-end gap-4">
           <button
             onClick={onSave}
-            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
           >
             Save Changes
           </button>
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+            className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300"
           >
             Cancel
           </button>
@@ -53,7 +57,6 @@ const AdminProfile = () => {
   const [newPhoto, setNewPhoto] = useState(null);
 
   const handleEditClick = () => setIsEditing(true);
-
   const handleCloseModal = () => setIsEditing(false);
 
   const handleSaveChanges = async () => {
@@ -74,7 +77,6 @@ const AdminProfile = () => {
         icon: "success",
         confirmButtonText: "Ok",
       }).then(() => {
-        // Close the modal after success
         setIsEditing(false);
       });
     } catch (err) {
@@ -92,40 +94,44 @@ const AdminProfile = () => {
     const file = e.target.files[0];
     if (file) {
       setNewPhoto(file);
-      setPhoto(URL.createObjectURL(file)); // To show the preview
+      setPhoto(URL.createObjectURL(file)); // Preview the selected photo
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-3xl font-semibold text-center text-gray-700 mb-4">
-        Welcome, {user?.displayName}
-      </h1>
+    <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+      {/* Profile Section */}
       <div className="flex flex-col items-center mb-6">
+        <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">
+          Welcome, {user?.displayName}
+        </h1>
         <img
           src={photo}
           alt="Profile"
-          className="w-32 h-32 rounded-full object-cover mb-4"
+          className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-500"
         />
         {!isEditing && (
-          <div className="text-center">
+          <div className="flex flex-col items-center gap-2">
             <p className="text-lg text-gray-600">Name: {name}</p>
             <p className="text-lg text-gray-600">Email: {user?.email}</p>
             <p className="text-lg text-gray-600">Role: {role}</p>
           </div>
         )}
+        {/* Edit Button */}
+        <div className="flex justify-center gap-4 my-8">
+          <button
+            onClick={handleEditClick}
+            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+          >
+            Edit Profile
+          </button>
+        </div>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <button
-          onClick={handleEditClick}
-          className="px-6 py-2 bg-[#93C5FD] text-white rounded-md hover:bg-yellow-600 transition duration-300"
-        >
-          Edit
-        </button>
-      </div>
-      <AdminStats></AdminStats>
+      {/* Admin Statistics */}
+      <AdminStats />
 
+      {/* Modal for editing profile */}
       {isEditing && (
         <Modal
           onClose={handleCloseModal}
